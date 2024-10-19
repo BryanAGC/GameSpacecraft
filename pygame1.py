@@ -33,7 +33,8 @@ while juagando:
     for evento in eventos:
         if evento.type == pygame.QUIT:
             juagando = False
-
+    
+    VENTANA.fill("black")
     cubo.dibujar(VENTANA)
 
     pygame.display.update()
