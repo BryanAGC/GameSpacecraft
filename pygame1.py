@@ -34,7 +34,8 @@ while juagando:
         if evento.type == pygame.QUIT:
             juagando = False
     
-    VENTANA.fill("black")
+    VENTANA.fill("black")   # Rellenara de color cada por cada vuelta en el bucle principal.
+                            # Ya que si no se realiza el perosonaje aparecera en toda la pantalla.Parecido al paint
     cubo.dibujar(VENTANA)
 
     pygame.display.update()
