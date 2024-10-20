@@ -11,9 +11,9 @@ VENTANA = pygame.display.set_mode([ANCHO,ALTO]) # Ventana principal con un arreg
 # Variables
 juagando = True
 cubo = Cubo(100,100)#   Dibujara el personaje en la ventana principal
-enemigos = []
+enemigos = []   #Lista de enemigos que apareceran por panatalla
 
-enemigos.append(Enemigo(ANCHO/2,100))
+enemigos.append(Enemigo(ANCHO/2,100))   #Test de colocar un enemigo en la VENTANA principal
 
 
 
@@ -27,7 +27,7 @@ def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlar
     if teclas[pygame.K_d]:  # Detecta si la tecla deleccionada esta siendo presionada
         cubo.x += cubo.velocidad    # Si "d" es presionada suma la posision de x. Suma 1 que es la velocidad
 
-
+# Ciclo principal
 while juagando:
     eventos = pygame.event.get()
 
@@ -46,7 +46,7 @@ while juagando:
     
     for enemigo in enemigos:
         enemigo.dibujar(VENTANA)
-        enemigo.movimiento()
+        enemigo.movimiento()    #Llamada  ala funcion moviento par aque enemigo se mueva por si mismo
 
     pygame.display.update()
 
