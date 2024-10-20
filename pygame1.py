@@ -46,6 +46,7 @@ while juagando:
     
     for enemigo in enemigos:
         enemigo.dibujar(VENTANA)
+        enemigo.movimiento()
 
     pygame.display.update()
 
