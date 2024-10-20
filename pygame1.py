@@ -2,14 +2,20 @@
 #imports
 import pygame
 from personaje import Cubo
+from enemigo import Enemigo
+
 ANCHO = 1000    # Ancho de la ventana
 ALTO = 800      # Alto de la ventana
 VENTANA = pygame.display.set_mode([ANCHO,ALTO]) # Ventana principal con un arreglo como parametros
 
-# Bucle principal del juego
+# Variables
 juagando = True
-
 cubo = Cubo(100,100)#   Dibujara el personaje en la ventana principal
+enemigos = []
+
+enemigos.append(Enemigo(ANCHO/2,100))
+
+
 
 def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlaran al personaje
     if teclas[pygame.K_w]:  # Detecta si la tecla deleccionada esta siendo presionada
@@ -37,6 +43,9 @@ while juagando:
     VENTANA.fill("black")   # Rellenara de color cada por cada vuelta en el bucle principal.
                             # Ya que si no se realiza el perosonaje aparecera en toda la pantalla.Parecido al paint
     cubo.dibujar(VENTANA)
+    
+    for enemigo in enemigos:
+        enemigo.dibujar(VENTANA)
 
     pygame.display.update()
 
