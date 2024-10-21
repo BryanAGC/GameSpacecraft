@@ -7,7 +7,7 @@ class Cubo:
         self.y = y
         self.ancho = 50
         self.alto = 50
-        self.velocidad = 1
+        self.velocidad = 10
         self.color = "red"
         self.rect = pygame.Rect(self.x,self.y,self.ancho,self.alto) #Forma de crear el personaje
 # Funcion que dibujara el personaje
