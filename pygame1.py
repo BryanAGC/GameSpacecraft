@@ -7,13 +7,13 @@ from enemigo import Enemigo
 ANCHO = 1000    # Ancho de la ventana
 ALTO = 800      # Alto de la ventana
 VENTANA = pygame.display.set_mode([ANCHO,ALTO]) # Ventana principal con un arreglo como parametros
-FPS = 60 
+FPS = 60 # Creamos la variable de FPs para que el juego valla igual en todos los ordenadores sin importar la potencia
 
 # Variables
 juagando = True
-reloj = pygame.time.Clock()
-tiempo_pasado = 0
-tiempo_entre_enemigos = 500
+reloj = pygame.time.Clock() # Se crea un reloj
+tiempo_pasado = 0   # Inicializamos timpo pasado en 0
+tiempo_entre_enemigos = 500 # Teimpo entre enemigos, dia 5 aun no se utiliza
 
 cubo = Cubo(100,100)#   Dibujara el personaje en la ventana principal
 enemigos = []   #Lista de enemigos que apareceran por panatalla
@@ -34,8 +34,8 @@ def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlar
 
 # Ciclo principal
 while juagando:
-    tiempo_pasado += reloj.tick(FPS)
-    print(tiempo_pasado)
+    tiempo_pasado += reloj.tick(FPS)    # Tiempo en el cual el juego esta corriendo
+    print(tiempo_pasado)    # Test del timpo pasado
 
     eventos = pygame.event.get()
 

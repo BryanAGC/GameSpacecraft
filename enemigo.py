@@ -10,7 +10,7 @@ class Enemigo:
         self.y = y
         self.ancho = 75
         self.alto = 75
-        self.velocidad = 5
+        self.velocidad = 5  # Auentamos la velocidad debido al cambio en FPS
         self.color = "purple"
         self.rect = pygame.Rect(self.x,self.y,self.ancho,self.alto) #Forma de crear el personaje
 
