@@ -12,6 +12,8 @@ FPS = 60
 # Variables
 juagando = True
 reloj = pygame.time.Clock()
+tiempo_pasado = 0
+tiempo_entre_enemigos = 500
 
 cubo = Cubo(100,100)#   Dibujara el personaje en la ventana principal
 enemigos = []   #Lista de enemigos que apareceran por panatalla
@@ -32,7 +34,8 @@ def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlar
 
 # Ciclo principal
 while juagando:
-    reloj.tick(FPS)
+    tiempo_pasado += reloj.tick(FPS)
+    print(tiempo_pasado)
 
     eventos = pygame.event.get()
 
