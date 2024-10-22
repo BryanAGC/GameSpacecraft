@@ -25,7 +25,7 @@ enemigos.append(Enemigo(ANCHO/2,100))   # Test de colocar un enemigo en la VENTA
 
 
 def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlaran al personaje
-    # Se documentaron teclas para evitar que la nave se mueva en el eje y
+    ## Se documentaron teclas para evitar que la nave se mueva en el eje y
 
     # if teclas[pygame.K_w]:  # Detecta si la tecla deleccionada esta siendo presionada
     #     cubo.y -= cubo.velocidad    # Si "w" es presionada resta la posision de y. Resta 1 que es la velocidad
