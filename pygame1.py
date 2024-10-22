@@ -3,6 +3,7 @@
 import pygame
 from personaje import Cubo
 from enemigo import Enemigo
+import random
 
 ANCHO = 1000    # Ancho de la ventana
 ALTO = 800      # Alto de la ventana
@@ -15,7 +16,7 @@ reloj = pygame.time.Clock() # Se crea un reloj
 tiempo_pasado = 0   # Inicializamos timpo pasado en 0
 tiempo_entre_enemigos = 500 # Teimpo entre enemigos, dia 5 aun no se utiliza
 
-cubo = Cubo(100,100)#   Dibujara el personaje en la ventana principal
+cubo = Cubo(ANCHO/2,ALTO-75)#   Dibujara el personaje en la ventana principal
 enemigos = []   #Lista de enemigos que apareceran por panatalla
 
 enemigos.append(Enemigo(ANCHO/2,100))   #Test de colocar un enemigo en la VENTANA principal
@@ -23,10 +24,10 @@ enemigos.append(Enemigo(ANCHO/2,100))   #Test de colocar un enemigo en la VENTAN
 
 
 def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlaran al personaje
-    if teclas[pygame.K_w]:  # Detecta si la tecla deleccionada esta siendo presionada
-        cubo.y -= cubo.velocidad    # Si "w" es presionada resta la posision de y. Resta 1 que es la velocidad
-    if teclas[pygame.K_s]:  # Detecta si la tecla deleccionada esta siendo presionada
-        cubo.y += cubo.velocidad    # Si "s" es presionada suma la posision de y. Suma 1 que es la velocidad
+    # if teclas[pygame.K_w]:  # Detecta si la tecla deleccionada esta siendo presionada
+    #     cubo.y -= cubo.velocidad    # Si "w" es presionada resta la posision de y. Resta 1 que es la velocidad
+    # if teclas[pygame.K_s]:  # Detecta si la tecla deleccionada esta siendo presionada
+    #     cubo.y += cubo.velocidad    # Si "s" es presionada suma la posision de y. Suma 1 que es la velocidad
     if teclas[pygame.K_a]:  # Detecta si la tecla deleccionada esta siendo presionada
         cubo.x -= cubo.velocidad    # Si "a" es presionada resta la posision de x. Resta 1 que es la velocidad
     if teclas[pygame.K_d]:  # Detecta si la tecla deleccionada esta siendo presionada
@@ -35,7 +36,11 @@ def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlar
 # Ciclo principal
 while juagando:
     tiempo_pasado += reloj.tick(FPS)    # Tiempo en el cual el juego esta corriendo
-    print(tiempo_pasado)    # Test del timpo pasado
+    #print(tiempo_pasado)    # Test del timpo pasado
+
+    if tiempo_pasado > tiempo_entre_enemigos:
+        enemigos.append(Enemigo(random.randint(0,ANCHO),-100))
+        tiempo_pasado = 0
 
     eventos = pygame.event.get()
 
