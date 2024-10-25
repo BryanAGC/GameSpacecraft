@@ -4,6 +4,7 @@ import pygame
 from personaje import Cubo
 from enemigo import Enemigo
 import random
+pygame.init()
 
 ANCHO = 1000    # Ancho de la ventana
 ALTO = 800      # Alto de la ventana
@@ -24,7 +25,7 @@ enemigos = []   #Lista de enemigos que apareceran por panatalla
 
 enemigos.append(Enemigo(ANCHO/2,100))   # Test de colocar un enemigo en la VENTANA principal
                                         # Se reajustaron las coordenas de personaje cubo para que aparesca hasta abajo del todo
-
+FUENTE = pygame.font.SysFont("Comic Sans", 40)
 
 
 def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlaran al personaje
@@ -52,6 +53,8 @@ while juagando and vidas>0:
 
     teclas = pygame.key.get_pressed()   # Esto devolvera una lista con todas las teclas que sean presionadas
                     #"key es para acceder a todo lo que tenga que ver con el teclado"
+    texto_vida = FUENTE.render(f"Vida: {vidas}",True,"white")
+    texto_Puntos = FUENTE.render(f"Vida: {puntos}",True,"white")
     gestionar_teclas(teclas)    # Llamada a la funcion
 
 
@@ -72,7 +75,8 @@ while juagando and vidas>0:
             vidas -=1   # Por cada  colicion restar una vida
             print(f"Te quedan : {vidas}")   # Imprimir vidas
             enemigos.remove(enemigo)    # Remover enemigo de la colicion para evitar que el restar vidas sea infinito
-
+    VENTANA.blit(texto_vida,(20,20))
+    VENTANA.blit(texto_Puntos,(20,60))
 
 
     pygame.display.update()
