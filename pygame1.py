@@ -13,8 +13,8 @@ FPS = 60 # Creamos la variable de FPs para que el juego valla igual en todos los
 # Variables
 juagando = True
 reloj = pygame.time.Clock() # Se crea un reloj
-vidas = 5
-puntos = 0
+vidas = 5   # Variable que contene las vidad
+puntos = 0  # Variable que contiene los puntos
 
 tiempo_pasado = 0   # Inicializamos timpo pasado en 0
 tiempo_entre_enemigos = 500 # Teimpo entre enemigos, dia 5 aun no se utiliza
@@ -67,11 +67,11 @@ while juagando and vidas>0:
         enemigo.dibujar(VENTANA)
         enemigo.movimiento()    #Llamada  ala funcion moviento par aque enemigo se mueva por si mismo
 
-        if pygame.Rect.colliderect(cubo.rect, enemigo.rect):
-            #quit()
-            vidas -=1
-            print(f"Te quedan : {vidas}")
-            enemigos.remove(enemigo)
+        if pygame.Rect.colliderect(cubo.rect, enemigo.rect):    #Condicional para las coliciones con la funcion rect
+            #quit() # Test de gameover
+            vidas -=1   # Por cada  colicion restar una vida
+            print(f"Te quedan : {vidas}")   # Imprimir vidas
+            enemigos.remove(enemigo)    # Remover enemigo de la colicion para evitar que el restar vidas sea infinito
 
 
 
