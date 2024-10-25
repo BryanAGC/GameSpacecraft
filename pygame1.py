@@ -4,7 +4,7 @@ import pygame
 from personaje import Cubo
 from enemigo import Enemigo
 import random
-pygame.init()
+pygame.init()   # Se coloca porque aveces fallan las fuentes con esto se corrige
 
 ANCHO = 1000    # Ancho de la ventana
 ALTO = 800      # Alto de la ventana
@@ -53,8 +53,8 @@ while juagando and vidas>0:
 
     teclas = pygame.key.get_pressed()   # Esto devolvera una lista con todas las teclas que sean presionadas
                     #"key es para acceder a todo lo que tenga que ver con el teclado"
-    texto_vida = FUENTE.render(f"Vida: {vidas}",True,"white")
-    texto_Puntos = FUENTE.render(f"Vida: {puntos}",True,"white")
+    texto_vida = FUENTE.render(f"Vida: {vidas}",True,"white")   # Es el texto que se mostrara  de las vidas
+    texto_Puntos = FUENTE.render(f"Vida: {puntos}",True,"white")    # Es el texto que se mostrara e los puntos
     gestionar_teclas(teclas)    # Llamada a la funcion
 
 
@@ -75,8 +75,8 @@ while juagando and vidas>0:
             vidas -=1   # Por cada  colicion restar una vida
             print(f"Te quedan : {vidas}")   # Imprimir vidas
             enemigos.remove(enemigo)    # Remover enemigo de la colicion para evitar que el restar vidas sea infinito
-    VENTANA.blit(texto_vida,(20,20))
-    VENTANA.blit(texto_Puntos,(20,60))
+    VENTANA.blit(texto_vida,(20,20))    # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga
+    VENTANA.blit(texto_Puntos,(20,60))  # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga
 
 
     pygame.display.update()
