@@ -13,6 +13,9 @@ FPS = 60 # Creamos la variable de FPs para que el juego valla igual en todos los
 # Variables
 juagando = True
 reloj = pygame.time.Clock() # Se crea un reloj
+vidas = 5
+puntos = 0
+
 tiempo_pasado = 0   # Inicializamos timpo pasado en 0
 tiempo_entre_enemigos = 500 # Teimpo entre enemigos, dia 5 aun no se utiliza
 
@@ -37,7 +40,7 @@ def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlar
         cubo.x += cubo.velocidad    # Si "d" es presionada suma la posision de x. Suma 1 que es la velocidad
 
 # Ciclo principal
-while juagando:
+while juagando and vidas>0:
     tiempo_pasado += reloj.tick(FPS)    # Tiempo en el cual el juego esta corriendo
     #print(tiempo_pasado)    # Test del timpo pasado
 
@@ -63,6 +66,14 @@ while juagando:
     for enemigo in enemigos:
         enemigo.dibujar(VENTANA)
         enemigo.movimiento()    #Llamada  ala funcion moviento par aque enemigo se mueva por si mismo
+
+        if pygame.Rect.colliderect(cubo.rect, enemigo.rect):
+            #quit()
+            vidas -=1
+            print(f"Te quedan : {vidas}")
+            enemigos.remove(enemigo)
+
+
 
     pygame.display.update()
 
