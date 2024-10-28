@@ -29,7 +29,7 @@ enemigos.append(Enemigo(ANCHO/2,100))   # Test de colocar un enemigo en la VENTA
                                         # Se reajustaron las coordenas de personaje cubo para que aparesca hasta abajo del todo
 FUENTE = pygame.font.SysFont("Comic Sans", 40)
 
-def crear_bala():
+def crear_bala():   # Con esta funcion se crean las balas desde el centro del personaje cubo
     balas.append(Bala(cubo.rect.centerx, cubo.rect.centery))
     
 
@@ -88,9 +88,9 @@ while juagando and vidas>0:
             puntos += 1 # Sumara un punto
             enemigos.remove(enemigo)    # Desparecera de la lista de enemigos para no generar puntos infinitos
 
-    for bala in balas:
-        bala.dibujar(VENTANA)
-        bala.movimiento() 
+    for bala in balas:  # Recorremos el arreglo de la sbalas
+        bala.dibujar(VENTANA)   # Dibujamos las balas
+        bala.movimiento()   # Damos el movimiento #NOTA: Hay que dar un tiempo de recarga porque se generan muchas
             
     VENTANA.blit(texto_vida,(20,20))    # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga
     VENTANA.blit(texto_Puntos,(20,60))  # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga

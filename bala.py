@@ -10,7 +10,7 @@ class Bala:
         self.y = y
         self.ancho = 20
         self.alto = 20
-        self.velocidad = 10  # Auentamos la velocidad debido al cambio en FPS
+        self.velocidad = 10  
         self.color = "white"
         self.rect = pygame.Rect(self.x,self.y,self.ancho,self.alto) #Forma de crear la bala
 
