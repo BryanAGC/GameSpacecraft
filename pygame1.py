@@ -75,9 +75,13 @@ while juagando and vidas>0:
             vidas -=1   # Por cada  colicion restar una vida
             print(f"Te quedan : {vidas}")   # Imprimir vidas
             enemigos.remove(enemigo)    # Remover enemigo de la colicion para evitar que el restar vidas sea infinito
+        if enemigo.y + enemigo.alto > ALTO:
+            puntos += 1
+            enemigos.remove(enemigo)
+            
     VENTANA.blit(texto_vida,(20,20))    # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga
     VENTANA.blit(texto_Puntos,(20,60))  # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga
-
+        
 
     pygame.display.update()
 
