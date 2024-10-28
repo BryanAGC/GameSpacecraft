@@ -4,6 +4,7 @@ import pygame
 from personaje import Cubo
 from enemigo import Enemigo
 import random
+from bala import Bala
 pygame.init()   # Se coloca porque aveces fallan las fuentes con esto se corrige
 
 ANCHO = 1000    # Ancho de la ventana
@@ -22,10 +23,15 @@ tiempo_entre_enemigos = 500 # Teimpo entre enemigos, dia 5 aun no se utiliza
 
 cubo = Cubo(ANCHO/2,ALTO-75)#   Dibujara el personaje en la ventana principal
 enemigos = []   #Lista de enemigos que apareceran por panatalla
+balas=[]
 
 enemigos.append(Enemigo(ANCHO/2,100))   # Test de colocar un enemigo en la VENTANA principal
                                         # Se reajustaron las coordenas de personaje cubo para que aparesca hasta abajo del todo
 FUENTE = pygame.font.SysFont("Comic Sans", 40)
+
+def crear_bala():
+    balas.append(Bala(cubo.rect.centerx, cubo.rect.centery))
+    
 
 
 def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlaran al personaje
@@ -39,6 +45,8 @@ def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlar
         cubo.x -= cubo.velocidad    # Si "a" es presionada resta la posision de x. Resta 1 que es la velocidad
     if teclas[pygame.K_d]:  # Detecta si la tecla deleccionada esta siendo presionada
         cubo.x += cubo.velocidad    # Si "d" es presionada suma la posision de x. Suma 1 que es la velocidad
+    if teclas[pygame.K_SPACE]:
+        crear_bala()
 
 # Ciclo principal
 while juagando and vidas>0:
@@ -79,6 +87,10 @@ while juagando and vidas>0:
         if enemigo.y + enemigo.alto > ALTO: # Cuando el denmigo pase la altura inferior del alto 
             puntos += 1 # Sumara un punto
             enemigos.remove(enemigo)    # Desparecera de la lista de enemigos para no generar puntos infinitos
+
+    for bala in balas:
+        bala.dibujar(VENTANA)
+        bala.movimiento() 
             
     VENTANA.blit(texto_vida,(20,20))    # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga
     VENTANA.blit(texto_Puntos,(20,60))  # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga
