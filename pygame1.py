@@ -24,13 +24,19 @@ tiempo_entre_enemigos = 500 # Teimpo entre enemigos, dia 5 aun no se utiliza
 cubo = Cubo(ANCHO/2,ALTO-75)#   Dibujara el personaje en la ventana principal
 enemigos = []   #Lista de enemigos que apareceran por panatalla
 balas=[]
+ultima_bala = 0
+tiempo_entre_balas = 500
 
 enemigos.append(Enemigo(ANCHO/2,100))   # Test de colocar un enemigo en la VENTANA principal
                                         # Se reajustaron las coordenas de personaje cubo para que aparesca hasta abajo del todo
 FUENTE = pygame.font.SysFont("Comic Sans", 40)
 
+
 def crear_bala():   # Con esta funcion se crean las balas desde el centro del personaje cubo
-    balas.append(Bala(cubo.rect.centerx, cubo.rect.centery))
+    global ultima_bala
+    if pygame.time.get_ticks()- ultima_bala > tiempo_entre_balas:
+        balas.append(Bala(cubo.rect.centerx, cubo.rect.centery))
+        ultima_bala = pygame.time.get_ticks()
     
 
 
@@ -41,13 +47,12 @@ def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlar
     #     cubo.y -= cubo.velocidad    # Si "w" es presionada resta la posision de y. Resta 1 que es la velocidad
     # if teclas[pygame.K_s]:  # Detecta si la tecla deleccionada esta siendo presionada
     #     cubo.y += cubo.velocidad    # Si "s" es presionada suma la posision de y. Suma 1 que es la velocidad
-    if teclas[pygame.K_a]:  # Detecta si la tecla deleccionada esta siendo presionada
+    if teclas[pygame.K_a] or teclas[pygame.K_LEFT ]:  # Detecta si la tecla deleccionada esta siendo presionada
         cubo.x -= cubo.velocidad    # Si "a" es presionada resta la posision de x. Resta 1 que es la velocidad
-    if teclas[pygame.K_d]:  # Detecta si la tecla deleccionada esta siendo presionada
+    if teclas[pygame.K_d] or teclas[pygame.K_RIGHT]:  # Detecta si la tecla deleccionada esta siendo presionada
         cubo.x += cubo.velocidad    # Si "d" es presionada suma la posision de x. Suma 1 que es la velocidad
-    if teclas[pygame.K_SPACE]:
+    if teclas[pygame.K_SPACE] or teclas[pygame.K_UP]:
         crear_bala()
-
 # Ciclo principal
 while juagando and vidas>0:
     tiempo_pasado += reloj.tick(FPS)    # Tiempo en el cual el juego esta corriendo
@@ -87,14 +92,20 @@ while juagando and vidas>0:
         if enemigo.y + enemigo.alto > ALTO: # Cuando el denmigo pase la altura inferior del alto 
             puntos += 1 # Sumara un punto
             enemigos.remove(enemigo)    # Desparecera de la lista de enemigos para no generar puntos infinitos
+        for bala in balas:
+            if pygame.Rect.colliderect(bala.rect, enemigo.rect):
+                enemigos.remove(enemigo)
+                balas.remove(bala)
+
 
     for bala in balas:  # Recorremos el arreglo de la sbalas
         bala.dibujar(VENTANA)   # Dibujamos las balas
         bala.movimiento()   # Damos el movimiento #NOTA: Hay que dar un tiempo de recarga porque se generan muchas
-            
+
+
     VENTANA.blit(texto_vida,(20,20))    # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga
     VENTANA.blit(texto_Puntos,(20,60))  # Se muestra en pantalla, se colo hata abajo del todo para que se super ponga
-        
+
 
     pygame.display.update()
 
