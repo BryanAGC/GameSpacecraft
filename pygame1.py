@@ -117,4 +117,10 @@ while juagando and vidas>0:
 
     pygame.display.update()
 
+pygame.quit()
+nombre=input("Introduce tu nombre: ")
+
+with open('puntuaciones.txt','a') as archivo:
+    archivo.write(f"{nombre}--{puntos}" )
+
 quit() # Cerrar el programa
