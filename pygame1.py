@@ -25,7 +25,7 @@ cubo = Cubo(ANCHO/2,ALTO-75)#   Dibujara el personaje en la ventana principal
 enemigos = []   #Lista de enemigos que apareceran por panatalla
 balas=[]
 ultima_bala = 0 # tiempo de la ultima bala
-tiempo_entre_balas = 500 # tiempro entre balas
+tiempo_entre_balas = 300 # tiempro entre balas
 
 enemigos.append(Enemigo(ANCHO/2,100))   # Test de colocar un enemigo en la VENTANA principal
                                         # Se reajustaron las coordenas de personaje cubo para que aparesca hasta abajo del todo
@@ -43,10 +43,10 @@ def crear_bala():   # Con esta funcion se crean las balas desde el centro del pe
 def gestionar_teclas(teclas):   #Funcion para gestionar las teclas que controlaran al personaje
     ## Se documentaron teclas para evitar que la nave se mueva en el eje y
 
-    # if teclas[pygame.K_w]:  # Detecta si la tecla deleccionada esta siendo presionada
-    #     cubo.y -= cubo.velocidad    # Si "w" es presionada resta la posision de y. Resta 1 que es la velocidad
+    # if teclas[pygame.K_w]:  # Detecta si la tecla deleccionada esta siendo presionadaa
+    #     cubo.y -= cubo.velocidad    # Si "w" es prsionada resta la posision de y. Resta 1 que es la velocidad
     # if teclas[pygame.K_s]:  # Detecta si la tecla deleccionada esta siendo presionada
-    # ! Se agregaron nuevas teclas de movimiento y disparo
+    # !   Se agregaron nuevas teclas de movimiento y disparo
     #     cubo.y += cubo.velocidad    # Si "s" es presionada suma la posision de y. Suma 1 que es la velocidad
     if teclas[pygame.K_a] or teclas[pygame.K_LEFT ]:  # Detecta si la tecla deleccionada esta siendo presionada
         cubo.x -= cubo.velocidad    # Si "a" es presionada resta la posision de x. Resta 1 que es la velocidad
@@ -68,7 +68,7 @@ while juagando and vidas>0:
     teclas = pygame.key.get_pressed()   # Esto devolvera una lista con todas las teclas que sean presionadas
                     #"key es para acceder a todo lo que tenga que ver con el teclado"
     texto_vida = FUENTE.render(f"Vida: {vidas}",True,"white")   # Es el texto que se mostrara  de las vidas
-    texto_Puntos = FUENTE.render(f"Vida: {puntos}",True,"white")    # Es el texto que se mostrara e los puntos
+    texto_Puntos = FUENTE.render(f"Puntos: {puntos}",True,"white")    # Es el texto que se mostrara e los puntos
     gestionar_teclas(teclas)    # Llamada a la funcion
 
 
@@ -86,17 +86,24 @@ while juagando and vidas>0:
 
         if pygame.Rect.colliderect(cubo.rect, enemigo.rect):    #Condicional para las coliciones con la funcion rect
             #quit() # Test de gameover
-            vidas -=1   # Por cada  colicion restar una vida
+            vidas -=1   
             print(f"Te quedan : {vidas}")   # Imprimir vidas
             enemigos.remove(enemigo)    # Remover enemigo de la colicion para evitar que el restar vidas sea infinito
 
-        if enemigo.y + enemigo.alto > ALTO: # Cuando el denmigo pase la altura inferior del alto 
+        if enemigo.y > ALTO: # Cuando el denmigo pase la altura inferior del alto 
             puntos += 1 # Sumara un punto
             enemigos.remove(enemigo)    # Desparecera de la lista de enemigos para no generar puntos infinitos
+
         for bala in balas:
-            if pygame.Rect.colliderect(bala.rect, enemigo.rect):    # implementamos la colicion de las balas con enemigo
-                enemigos.remove(enemigo)    #Borramos a enemigo  d la lista
+            if pygame.Rect.colliderect(bala.rect, enemigo.rect):
+                enemigo.vida  -=1   
+                
+                
                 balas.remove(bala)  # Borramos a bala de las balas
+                puntos +=1
+
+        if enemigo.vida<=0:
+            enemigos.remove(enemigo)
 
 
     for bala in balas:  # Recorremos el arreglo de la sbalas

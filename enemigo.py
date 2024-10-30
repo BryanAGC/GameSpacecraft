@@ -13,7 +13,8 @@ class Enemigo:
         self.velocidad = 5  # Auentamos la velocidad debido al cambio en FPS
         self.color = "purple"
         self.rect = pygame.Rect(self.x,self.y,self.ancho,self.alto) #Forma de crear el personaje
-
+        self.vida = 3
+        
     def dibujar(self, ventana):
         pygame.draw.rect(ventana,self.color,self.rect)
         self.rect = pygame.Rect(self.x,self.y,self.ancho,self.alto) #Cambiara las coordenadas de enemigo cada vez que sea dibujado
